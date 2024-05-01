@@ -3,7 +3,8 @@ import { render, screen } from "@testing-library/react";
 
 describe("Form", () => {
   test("Render Form Data", () => {
-    render(<FormComponent />);
+    const mockData = ["1", 2, 3];
+    render(<FormComponent props={mockData} />);
 
     // Testing with getByRole
     const heading1 = screen.getByRole("heading", { level: 1 });
@@ -44,5 +45,12 @@ describe("Form", () => {
     // Testing with getByTestId
     const testId = screen.getByTestId("Test");
     expect(testId).toBeInTheDocument();
+
+    // Testing with getAllByRole
+    const listElement = screen.getByRole("list");
+    expect(listElement).toBeInTheDocument();
+
+    const allListElement = screen.getAllByRole("listitem");
+    expect(allListElement).toHaveLength(mockData.length);
   });
 });
