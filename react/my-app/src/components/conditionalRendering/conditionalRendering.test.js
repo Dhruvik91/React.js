@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, logRoles } from "@testing-library/react";
 import ConditionalRendering from "./conditionalRendering";
 
 describe("Check If Conditional Rendering Occurs", () => {
@@ -21,5 +21,24 @@ describe("Check If Conditional Rendering Occurs", () => {
       name: "Start Learning",
     });
     expect(startButton).not.toBeInTheDocument();
+  });
+
+  // Here we are testing the start button when the user clicks on the login button
+
+  test("Start button Rendering", async () => {
+    const view = render(<ConditionalRendering props={mockData} />);
+    logRoles(view.container);
+    screen.debug();
+    const startButtonRendered = await screen.findByRole(
+      "button",
+      {
+        name: "Start Learning",
+      },
+      {
+        timeout: 2000,
+      }
+    );
+    screen.debug();
+    expect(startButtonRendered).toBeInTheDocument();
   });
 });

@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function ConditionalRendering({ props }) {
   const [isLogin, setIsLogin] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLogin(true);
+    }, 500);
+  }, []);
   return (
     <>
       <ul>
